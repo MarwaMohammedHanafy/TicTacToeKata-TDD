@@ -3,7 +3,8 @@ const {
     diagonalIsTaken,
     columnIsTaken,
     IsBoardFull,
-    setField
+    setField,
+    switchTurn
 } = require("./tictactoeMain.js");
 
 //a game is over when all fields in a row are taken by a player
@@ -217,6 +218,25 @@ describe("a player can not take a field if  already taken", () => {
             ["O", null, "X"],
             ["X", "O", null]
         ]);
+    });
+
+});
+
+//players take turns taking fields 
+describe("players take turns taking fields", () => {
+    //Arrange 
+    let currentPlayer = "O";
+    test('if player O play switch turn to Player X', () => {
+        //Act 
+        currentPlayer = switchTurn(currentPlayer);
+        //Assert
+        expect(currentPlayer).toBe("X");
+    });
+    test('if player X play switch turn to Player O', () => {
+        //Act 
+        currentPlayer = switchTurn(currentPlayer);
+        //Assert
+        expect(currentPlayer).toBe("O");
     });
 
 });
