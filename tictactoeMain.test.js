@@ -1,6 +1,9 @@
 const {
-    rowIsTaken
+    rowIsTaken,
+    diagonalIsTaken
 } = require("./tictactoeMain.js");
+
+//a game is over when all fields in a row are taken by a player
 
 describe("Test a game is over when all fields in a row are taken by a player ", () => {;
     test('it throws an error if not send the board ', () => {
@@ -18,7 +21,7 @@ describe("Test a game is over when all fields in a row are taken by a player ", 
         //Act 
         const result = rowIsTaken(board);
         //Assert
-        expect(result).toBe('X Is A WINNER');
+        expect(result).toBe('Player X Is A WINNER');
     });
     test('return O ,If all three cells in any row are O', () => {
         //Arrange 
@@ -30,7 +33,41 @@ describe("Test a game is over when all fields in a row are taken by a player ", 
         //Act 
         const result = rowIsTaken(board);
         //Assert
-        expect(result).toBe('O Is A WINNER');
+        expect(result).toBe('Player O Is A WINNER');
+    });
+    
+});
+
+//a game is over when all fields in a diagonal are taken by a player
+describe("Test a game is over when all fields in a diagonal are taken by a player ", () => {;
+    test('it throws an error if not send the board ', () => {
+        expect(() => {
+            diagonalIsTaken();
+        }).toThrow("The board is required");
+    });
+    test('return X ,If all three cells in any diagonal are X', () => {
+        //Arrange 
+        const board = [
+            ["X", "X", null],
+            [null, "X", "0"],
+            ["X", null, "X"]
+        ];
+        //Act 
+        const result = diagonalIsTaken(board);
+        //Assert
+        expect(result).toBe('Player X Is A WINNER');
+    });
+    test('return O ,If all three cells in any diagonal are O', () => {
+        //Arrange 
+        const board = [
+            ["X", "O", "O"],
+            [null, "O", "X"],
+            ["O", null, "X"]
+        ];
+        //Act 
+        const result = diagonalIsTaken(board);
+        //Assert
+        expect(result).toBe('Player O Is A WINNER');
     });
     
 });
