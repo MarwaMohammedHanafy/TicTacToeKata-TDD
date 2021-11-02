@@ -43,10 +43,22 @@ const columnIsTaken = board => {
         }
     }
 };
+const IsBoardFull = board => {
+    if (!board) throw new "The board is required";
+    for (let row = 0; row < 3; row++) {
+        for (let col = 0; col < 3; col++) {
+            if (!(board[row][col])) {
+                return false;
+            }
+        }
+    }
+    return true;
+};
 
 
 module.exports = {
     rowIsTaken,
     diagonalIsTaken,
-    columnIsTaken
+    columnIsTaken,
+    IsBoardFull
 };
