@@ -3,6 +3,7 @@
  * @param {*} board 
  * @returns 
  */
+
 const rowIsTaken = board => {
     if (!board) throw new "The board is required";
     for (let row = 0; row < 3; row++) {
@@ -55,10 +56,20 @@ const IsBoardFull = board => {
     return true;
 };
 
+const setField = (board, row, col, player) => {
+    if (!board) throw new "The board is required";
+    if (!player) throw new "The player is required";
+
+    if (!(board[row][col])) {
+        board[row][col] = player;
+    }
+    return board;
+};
 
 module.exports = {
     rowIsTaken,
     diagonalIsTaken,
     columnIsTaken,
-    IsBoardFull
+    IsBoardFull,
+    setField
 };

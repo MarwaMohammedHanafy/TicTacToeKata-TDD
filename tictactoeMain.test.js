@@ -2,13 +2,48 @@ const {
     rowIsTaken,
     diagonalIsTaken,
     columnIsTaken,
-    IsBoardFull
+    IsBoardFull,
+    setField
 } = require("./tictactoeMain.js");
 
 //a game is over when all fields in a row are taken by a player
 
 describe("Test a game is over when all fields in a row are taken by a player ", () => {
-    ;
+    test('it throws an error if not send the board ', () => {
+        expect(() => {
+            rowIsTaken();
+        }).toThrow("The board is required");
+    });
+    test('return X ,If all three cells in any row are X', () => {
+        //Arrange 
+        const board = [
+            ["X", "X", "X"],
+            [null, null, "O"],
+            ["X", null, "O"]
+        ];
+        //Act 
+        const result = rowIsTaken(board);
+        //Assert
+        expect(result).toBe('Player X Is A WINNER');
+    });
+    test('return O ,If all three cells in any row are O', () => {
+        //Arrange 
+        const board = [
+            ["O", "O", "O"],
+            [null, null, "X"],
+            ["O", null, "O"]
+        ];
+        //Act 
+        const result = rowIsTaken(board);
+        //Assert
+        expect(result).toBe('Player O Is A WINNER');
+    });
+
+});
+
+//a game is over when all fields in a row are taken by a player
+
+describe("Test a game is over when all fields in a row are taken by a player ", () => {
     test('it throws an error if not send the board ', () => {
         expect(() => {
             rowIsTaken();
@@ -43,7 +78,6 @@ describe("Test a game is over when all fields in a row are taken by a player ", 
 
 //a game is over when all fields in a diagonal are taken by a player
 describe("Test a game is over when all fields in a diagonal are taken by a player ", () => {
-    ;
     test('it throws an error if not send the board ', () => {
         expect(() => {
             diagonalIsTaken();
@@ -78,7 +112,6 @@ describe("Test a game is over when all fields in a diagonal are taken by a playe
 
 //a game is over when all fields in a column are taken by a player
 describe("Test a game is over when all fields in a column are taken by a player ", () => {
-    ;
     test('it throws an error if not send the board ', () => {
         expect(() => {
             columnIsTaken();
@@ -114,7 +147,6 @@ describe("Test a game is over when all fields in a column are taken by a player 
 //a game is over when all fields are taken
 
 describe("a game is over when all fields are taken", () => {
-    ;
     test('it throws an error if not send the board ', () => {
         expect(() => {
             IsBoardFull();
@@ -148,3 +180,43 @@ describe("a game is over when all fields are taken", () => {
 
 });
 
+//
+
+describe("a player can take a field if not already taken", () => {
+    //Arrange 
+    const board = [
+        ["X", null, "O"],
+        ["O", null, "X"],
+        ["X", "O", null]
+    ];
+    test('set Field 0,1 to X in board', () => {
+        //Act 
+        const result = setField(board, 0, 1, "X");
+        //Assert
+        expect(result).toStrictEqual([
+            ["X", "X", "O"],
+            ["O", null, "X"],
+            ["X", "O", null]
+        ]);
+    });
+
+});
+describe("a player can not take a field if  already taken", () => {
+    //Arrange 
+    const board = [
+        ["X", null, "O"],
+        ["O", null, "X"],
+        ["X", "O", null]
+    ];
+    test('set Field 0,0 to O in board', () => {
+        //Act 
+        const result = setField(board, 0, 0, "O");
+        //Assert
+        expect(result).toStrictEqual([
+            ["X", null, "O"],
+            ["O", null, "X"],
+            ["X", "O", null]
+        ]);
+    });
+
+});
