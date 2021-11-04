@@ -222,7 +222,7 @@ describe("a player can not take a field if  already taken", () => {
 
 });
 
-//players take turns taking fields 
+//players take turns  
 describe("players take turns taking fields", () => {
     //Arrange 
     let currentPlayer = "O";

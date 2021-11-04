@@ -65,9 +65,9 @@ const setField = (board, row, col, player) => {
     }
     return board;
 };
-const switchTurn = currentPlayer =>{
+const switchTurn = currentPlayer => {
     if (!currentPlayer) throw new "The player is required";
-    return currentPlayer === 'O'? 'X': currentPlayer === 'X'? 'O': "error";
+    return currentPlayer === 'O' ? 'X' : currentPlayer === 'X' ? 'O' : "error";
 }
 
 module.exports = {
